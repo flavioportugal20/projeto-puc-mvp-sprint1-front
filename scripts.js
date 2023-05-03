@@ -219,6 +219,28 @@ const getCountVisitanteBloqueados = async () => {
 
 /*
   --------------------------------------------------------------------------------------
+  Função para deletar um item da lista de visitantes do servidor via requisição DELETE
+  --------------------------------------------------------------------------------------
+*/
+const deleteItemVisitante = (item) => {
+  console.log(item)
+  let url = 'http://127.0.0.1:5000/visitante?id=' + item;
+  fetch(url, {
+    method: 'delete'
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert("Visitante removido com suscesso!");
+      closeModal('dv-modal-visitante-cadastro');
+      getListVisitante();    
+    })
+    .catch((error) => {
+      alert(error);
+    });
+}
+
+/*
+  --------------------------------------------------------------------------------------
   Função para criar um botão de remove para cada item da lista de visitante
   --------------------------------------------------------------------------------------
 */
@@ -329,28 +351,6 @@ const cadastrarNovoRegistroVisitante = () => {
 const abrirCadastroVisitante = () => {
   getListVisitante();
   openModal('dv-modal-visitante');
-}
-
-/*
-  --------------------------------------------------------------------------------------
-  Função para deletar um item da lista de visitantes do servidor via requisição DELETE
-  --------------------------------------------------------------------------------------
-*/
-const deleteItemVisitante = (item) => {
-  console.log(item)
-  let url = 'http://127.0.0.1:5000/visitante?id=' + item;
-  fetch(url, {
-    method: 'delete'
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      alert("Visitante removido com suscesso!");
-      closeModal('dv-modal-visitante');
-      getListAcesso();    
-    })
-    .catch((error) => {
-      alert(error);
-    });
 }
 
 /*
